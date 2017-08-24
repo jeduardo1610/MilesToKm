@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        distanceTextField.delegate = self
         resultLabel.text = ""
     }
 
@@ -54,6 +54,15 @@ class ViewController: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool { //hide or show status bar
+        return true
+    }
+    
+}
+
+extension ViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     
