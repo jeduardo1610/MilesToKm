@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         distanceTextField.delegate = self
+        self.hideKeyboardWhenTappingAround()
         resultLabel.text = ""
     }
 
@@ -60,10 +61,23 @@ class ViewController: UIViewController {
 }
 
 extension ViewController : UITextFieldDelegate {
-    
+    //Hide keyboard when tapping return/intro
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+}
+
+extension ViewController {
+    //Hide keyboard by implementing tap gesture recognizer in order to "listen" for user tapping around the app screen
+    func hideKeyboardWhenTappingAround(){
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        view.endEditing(true)
     }
     
 }
